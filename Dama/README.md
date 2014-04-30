@@ -1,11 +1,12 @@
-Dama
+Progetto di Programmazione II
 ==================
 
-di Luca Vicentini & Matteo Dal Monte
+prof. Fausto Spoto
 
-Progetto di Programmazione
+Dama
 ------------------
 
-II Prof. Fausto Spoto
+di Luca Vicentini & Matteo Dal Monte
+..................
 
 Anno accademico 2013 / 2014
