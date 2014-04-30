@@ -202,7 +202,6 @@ public class PannelloDamiera extends JPanel {
 						}
 
 						else if(!multipla){ 												// secondo bottone premuto
-							bottoni[x][y].setPressed(true);
 							mossaUtente[1] = bottoni [x][y];
 
 							try {
@@ -215,13 +214,11 @@ public class PannelloDamiera extends JPanel {
 						mossaUtente[0] = null;
 						mossaUtente[1] = null;
 						illuminaMosseValide(damiera.getCella(x, y), damiera, false);		// toglie i bordi alle celle precedentemente selezionate
-						bottoni[x][y].setPressed(false);
 					}
 
 					else if (!damiera.getCella(x, y).isEmpty() && !damiera.getCella(x, y).getColorePedina()){}  // se premo una pedina non eseguo operazioni
 					else if (damiera.getCella(x, y).isEmpty() && damiera.getCella(x, y).getColore() || damiera.getCella(x, y).isEmpty() && !damiera.getCella(x, y).getColore() && mossaUtente[0] == null){}
 					else{																	// secondo bottone premuto è una cella vuota
-						bottoni[x][y].setPressed(true);
 						mossaUtente[1] = bottoni [x][y];
 						try {
 							controllaCella();												// se è corretta eseguo la mossa scelta
@@ -235,12 +232,10 @@ public class PannelloDamiera extends JPanel {
 					eseguiMossa();
 
 				else if (damiera.getCella(mossaUtente[1].getx(), mossaUtente[1].gety()).getPedina() == null){			// se clicco una cella vuota non illuminata
-					mossaUtente[1].setPressed(false);
 					mossaUtente[1]=null;	
 				}																										// se ho cliccato una cella contenente una pedina bianca
 				else if (damiera.getCella(mossaUtente[1].getx(), mossaUtente[1].gety()).getColorePedina() == damiera.getCella(mossaUtente[0].getx(), mossaUtente[0].gety()).getColorePedina() ) {
 					illuminaMosseValide(damiera.getCella(mossaUtente[0].getx(), mossaUtente[0].gety()), damiera, false);
-					bottoni[ mossaUtente[0].getx() ][ mossaUtente[0].gety() ].setPressed(false);				
 					mossaUtente[0] = mossaUtente[1];
 					mossaUtente[1] = null;
 					illuminaMosseValide(damiera.getCella(mossaUtente[0].getx(), mossaUtente[0].gety()), damiera, true);	// illumino le nuove mosse valide
