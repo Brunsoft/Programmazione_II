@@ -99,13 +99,16 @@ public class Damiera {
 
 	private void setPedineDebug() {																		// set pedine debug
 
-		damiera[4][4].addPedina(new Pedina(true));
-		damiera[2][4].addPedina(new Pedina(true));
-		damiera[5][1].addPedina(new Dama(false));
-		damiera[2][2].addPedina(new Pedina(true));
-		damiera[7][1].addPedina(new Pedina(true));
-		damiera[6][4].addPedina(new Pedina(true));
-		damiera[2][6].addPedina(new Pedina(true));
+//		damiera[4][4].addPedina(new Pedina(true));
+//		damiera[2][4].addPedina(new Pedina(true));
+//		damiera[2][4].addPedina(new Dama(false));
+//		damiera[2][2].addPedina(new Pedina(true));
+//		damiera[7][1].addPedina(new Pedina(true));
+//		damiera[6][4].addPedina(new Pedina(true));
+//		damiera[2][6].addPedina(new Pedina(true));
+		damiera[6][2].addPedina(new Pedina(false));
+		damiera[7][3].addPedina(new Dama(true));
+		damiera[4][2].addPedina(new Pedina(false));
 	}
 	
 }

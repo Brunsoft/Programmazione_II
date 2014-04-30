@@ -40,7 +40,6 @@ public class PannelloDamiera extends JPanel {
 		setLayout(new GridLayout(8,8));
 		costruisciDamiera();
 		t.start();
-
 	}
 
 	private void costruisciDamiera() {											// aggiunge caselle alla griglia e il corrispondente ascoltatore
@@ -84,11 +83,17 @@ public class PannelloDamiera extends JPanel {
 			else																												// partita terminata in pari
 				scelta = JOptionPane.showOptionDialog(frame, "PAREGGIO! " + "Vuoi cominciare una nuova partita?", "DAMA",
 						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, opzioni, opzioni[1]);
-			if(scelta==0)
+			if(scelta==0){
 				azzeraDamiera();				// azzera damiera e ricomincia partita
-			else
+				if(damiera.getNumeroPedine()[0] == 0 || termina == -1)
+					turno = true;
+				if(damiera.getNumeroPedine()[1] == 0 || termina == 1)
+					turno = false;
+			}else
 				System.exit(0); 				// esci dal gioco
-		}
+		}else
+			if (turno)
+				turno = false;
 	}
 	
 	private void illuminaMosseValide (Cella cella, Damiera damiera, boolean comando) {						// illumina la cella cliccata e le corrispondenti celle finali
@@ -101,11 +106,12 @@ public class PannelloDamiera extends JPanel {
 				if (cella.equals(m.getInizio()))
 					if (comando) {
 						bottoni[m.getInizio().getX()] [m.getInizio().getY()].setPressed(true);
-						bottoni[m.getInizio().getX()] [m.getInizio().getY()].setBorder(BorderFactory.createLineBorder(Color.YELLOW, 1));		// cella cliccata GIALLA
-						bottoni[m.getFine().getX()] [m.getFine().getY()].setBorder(BorderFactory.createLineBorder(Color.RED, 1));				// celle destinazione ROSSE
+						bottoni[m.getInizio().getX()] [m.getInizio().getY()].setBorder(BorderFactory.createLineBorder(Color.YELLOW, 2));		// cella cliccata GIALLA
+						bottoni[m.getFine().getX()] [m.getFine().getY()].setBorder(BorderFactory.createLineBorder(Color.RED, 2));				// celle destinazione ROSSE
 
 					}
 					else {
+						bottoni[m.getInizio().getX()] [m.getInizio().getY()].setPressed(false);
 						bottoni[m.getInizio().getX()] [m.getInizio().getY()].setBorder(null);				// toglie i bordi alla fine della mossa o in caso di deselezione
 						bottoni[m.getFine().getX()] [m.getFine().getY()].setBorder(null);
 					}
@@ -117,29 +123,35 @@ public class PannelloDamiera extends JPanel {
 				if (m.getPercorso() != null && m.getPercorso().length > 2){									// se esiste un percorso ed è > 2
 					if (cella.equals(m.getPercorso()[0]))
 						if (comando) {
-							bottoni[m.getPercorso()[0].getX()] [m.getPercorso()[0].getY()].setBorder(BorderFactory.createLineBorder(Color.YELLOW, 1));	// cella cliccata GIALLA
-							bottoni[m.getPercorso()[2].getX()] [m.getPercorso()[2].getY()].setBorder(BorderFactory.createLineBorder(Color.RED, 1));		// celle destinazione ROSSE
+							bottoni[m.getPercorso()[0].getX()] [m.getPercorso()[0].getY()].setPressed(true);
+							bottoni[m.getPercorso()[0].getX()] [m.getPercorso()[0].getY()].setBorder(BorderFactory.createLineBorder(Color.YELLOW, 2));	// cella cliccata GIALLA
+							bottoni[m.getPercorso()[2].getX()] [m.getPercorso()[2].getY()].setBorder(BorderFactory.createLineBorder(Color.RED, 2));		// celle destinazione ROSSE
 							b = true;
 						}
 						else {
+							bottoni[m.getPercorso()[0].getX()] [m.getPercorso()[0].getY()].setPressed(false);
 							bottoni[m.getPercorso()[0].getX()] [m.getPercorso()[0].getY()].setBorder(null);	// toglie i bordi alla fine della mossa o in caso di deselezione
 							bottoni[m.getPercorso()[2].getX()] [m.getPercorso()[2].getY()].setBorder(null);
 						}
 				}else
 					if (cella.equals(m.getInizio()))
 						if (comando) {
-							bottoni[m.getInizio().getX()] [m.getInizio().getY()].setBorder(BorderFactory.createLineBorder(Color.YELLOW, 1));			// cella cliccata GIALLA
-							bottoni[m.getFine().getX()] [m.getFine().getY()].setBorder(BorderFactory.createLineBorder(Color.RED, 1));					// celle destinazione ROSSE
+							bottoni[m.getInizio().getX()] [m.getInizio().getY()].setPressed(true);
+							bottoni[m.getInizio().getX()] [m.getInizio().getY()].setBorder(BorderFactory.createLineBorder(Color.YELLOW, 2));			// cella cliccata GIALLA
+							bottoni[m.getFine().getX()] [m.getFine().getY()].setBorder(BorderFactory.createLineBorder(Color.RED, 2));					// celle destinazione ROSSE
 							b = true;
 						}
 						else {
+							bottoni[m.getInizio().getX()] [m.getInizio().getY()].setPressed(false);
 							bottoni[m.getInizio().getX()] [m.getInizio().getY()].setBorder(null);
 							bottoni[m.getFine().getX()] [m.getFine().getY()].setBorder(null);
 						}
 			}
 			if (!b && !multipla)													// se ci sono mangiate (son obbligato a fare la mangiata migliore)
-				for (Mossa m:listaMangiate)
-					bottoni[m.getPercorso()[0].getX()] [m.getPercorso()[0].getY()].setBorder(BorderFactory.createLineBorder(Color.BLUE, 1));			// celle iniziale obbligata BLU
+				for (Mossa m:listaMangiate){
+					bottoni[m.getPercorso()[0].getX()] [m.getPercorso()[0].getY()].setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));			// celle iniziale obbligata BLU
+					bottoni[m.getPercorso()[0].getX()] [m.getPercorso()[0].getY()].setIcona(true);
+				}
 		}
 	}
 
@@ -184,7 +196,7 @@ public class PannelloDamiera extends JPanel {
 						}
 
 						else if(!multipla){ 												// secondo bottone premuto
-							bottoni[x][y].setPressed(true);
+							//bottoni[x][y].setPressed(true);
 							mossaUtente[1] = bottoni [x][y];
 
 							try {
@@ -197,13 +209,13 @@ public class PannelloDamiera extends JPanel {
 						mossaUtente[0] = null;
 						mossaUtente[1] = null;
 						illuminaMosseValide(damiera.getCella(x, y), damiera, false);		// toglie i bordi alle celle precedentemente selezionate
-						bottoni[x][y].setPressed(false);
+						//bottoni[x][y].setPressed(false);
 					}
 
 					else if (!damiera.getCella(x, y).isEmpty() && !damiera.getCella(x, y).getColorePedina()){}  // se premo una pedina non eseguo operazioni
 					else if (damiera.getCella(x, y).isEmpty() && damiera.getCella(x, y).getColore() || damiera.getCella(x, y).isEmpty() && !damiera.getCella(x, y).getColore() && mossaUtente[0] == null){}
 					else{																	// secondo bottone premuto è una cella vuota
-						bottoni[x][y].setPressed(true);
+						//bottoni[x][y].setPressed(true);
 						mossaUtente[1] = bottoni [x][y];
 						try {
 							controllaCella();												// se è corretta eseguo la mossa scelta

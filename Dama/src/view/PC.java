@@ -26,7 +26,7 @@ public class PC implements Runnable {										// esegue la mossa del PC
 			}
 			aspetta(100);													// mette in pausa la thread per 100 msec
 			ia.stop = false;
-			PannelloDamiera.turno = false;									// passo il turno
+			//PannelloDamiera.turno = false;								// passo il turno
 			FinestraDama.illumina(true);									// illumina il pallino dell'Utente
 		}
 	}
