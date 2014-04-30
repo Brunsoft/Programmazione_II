@@ -1,4 +1,4 @@
-## Dama ## di Luca Vicentini & Matteo Dal Monte
+** Dama ** di Luca Vicentini & Matteo Dal Monte
 
 Anno accademico 2013 / 2014
 
