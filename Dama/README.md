@@ -7,6 +7,6 @@ Dama
 ------------------
 
 di Luca Vicentini & Matteo Dal Monte
-..................
+__________________
 
 Anno accademico 2013 / 2014
