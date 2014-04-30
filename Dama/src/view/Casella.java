@@ -12,7 +12,7 @@ public class Casella extends JButton {
 	private int x,y;																// coordinate
 	boolean pressed;
 	ImageIcon scura, chiara;														// sfondi caselle
-	ImageIcon nera, bianca, damaNera, damaBianca;									// icone caselle (pedine)
+	ImageIcon nera, bianca, bianca_1, damaNera, damaBianca, damaBianca_1;									// icone caselle (pedine)
 	Damiera damiera;
 	JLabel pedina = new JLabel();
 
@@ -23,8 +23,10 @@ public class Casella extends JButton {
 		chiara = new ImageIcon("images/chiara.png");
 		nera = new ImageIcon("images/Pedine/nera.png");
 		bianca = new ImageIcon("images/Pedine/bianca.png");
+		bianca_1 = new ImageIcon("images/Pedine/bianca_1.png");
 		damaNera = new ImageIcon("images/Pedine/dama_nera.png");
 		damaBianca = new ImageIcon("images/Pedine/dama_bianca.png");
+		damaBianca_1 = new ImageIcon("images/Pedine/dama_bianca_1.png");
 		this.x = x;
 		this.y = y;
 		this.damiera = damiera;
@@ -83,6 +85,19 @@ public class Casella extends JButton {
 			pedina.setIcon(nera);
 	}
 
+	public void setIcona(boolean scelta){											// imposta pedina più piccola se viene premuta una casella
+		if (scelta)																	// per evitare deformazioni grafiche duvute al settaggio dei bordi di selezione
+			if (!(damiera.getCella(x,y).getPedina() instanceof Dama))
+				pedina.setIcon(bianca_1);
+			else
+				pedina.setIcon(damaBianca_1);
+		else
+			if (!(damiera.getCella(x,y).getPedina() instanceof Dama))
+				pedina.setIcon(bianca);
+			else
+				pedina.setIcon(damaBianca);
+	}
+	
 	public void setPressed(boolean pressed){
 		this.pressed = pressed;
 	}
